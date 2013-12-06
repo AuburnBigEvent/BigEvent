@@ -35,13 +35,15 @@ module.exports = {
         app.get('/volunteer/team/leave', routes.team.leave);
         app.get('/volunteer/team/:id', routes.team.get);
         
+        app.get('/staffHome', routes.staffHome.get);
+
         app.get('/staff/volunteer/team/list', routes.staffTeamList);
         app.get('/staff/volunteer/team/:id', routes.team.get);
 
-        app.get('/jobsite/request', routes.jobsite.request.get);
-        app.post('/jobsite/request', routes.jobsite.request.post);
-        app.get('/jobsite/request/success', routes.jobsite.request.success);
-        app.get('/jobsite/request/failure', routes.jobsite.request.failure);
+        app.get('/jobsite/request', routes.jobsiteRequest.get);
+        app.post('/jobsite/request', routes.jobsiteRequest.post);
+        app.get('/jobsite/request/success', routes.jobsiteRequest.success);
+        app.get('/jobsite/request/failure', routes.jobsiteRequest.failure);
 
         app.get('/staffRegistration', routes.staffRegistration.get);
         app.get('/staffRegistration/success', routes.staffRegistration.success);
@@ -64,17 +66,21 @@ module.exports = {
         app.get('/staff/volunteer/account/:id', routes.volunteer.account.staff.get);
         app.post('/staff/volunteer/account/:id', routes.volunteer.account.staff.post);
 
-        app.get('/staff/jobsite/request', routes.jobsite.request.get);
-        app.post('/staff/jobsite/request', routes.jobsite.request.staff.post);
-        app.get('/staff/jobsite/request/success', routes.jobsite.request.success);
-        app.get('/staff/jobsite/request/failure', routes.jobsite.request.failure);
+        app.get('/staff/jobsite/request', routes.jobsiteRequest.get);
+        app.post('/staff/jobsite/request', routes.jobsiteRequest.staff.post);
+        app.get('/staff/jobsite/request/success', routes.jobsiteRequest.success);
+        app.get('/staff/jobsite/request/failure', routes.jobsiteRequest.failure);
 
-        app.get('/staff/jobsite/evaluation/success', routes.jobsite.evaluation.success);
-        app.get('/staff/jobsite/evaluation/failure', routes.jobsite.evaluation.failure);
-        app.get('/staff/jobsite/evaluation/delete/:id', routes.jobsite.evaluation.delete);
-        app.get('/staff/jobsite/evaluation/:id', routes.jobsite.evaluation.get);
-        app.post('/staff/jobsite/evaluation/:id', routes.jobsite.evaluation.post);
-	
+        app.get('/staff/jobsite/evaluation-listing', routes.jobsiteEvaluation.listing);
+
+        app.get('/staff/jobsite/:id', routes.jobsite.get);
+        app.post('/staff/jobsite/:id', routes.jobsite.post);
+        app.get('/staff/jobsite/:id/delete', routes.jobsite.delete);
+        app.get('/staff/jobsite/:id/approve', routes.jobsite.approve);
+        app.get('/staff/jobsite/:id/claim', routes.jobsite.claim);
+        app.get('/staff/jobsite/:id/unclaim', routes.jobsite.unclaim);
+        app.get('/staff/jobsite/:id/evaluation', routes.jobsiteEvaluation.get);
+
         app.get('/staff/tool', routes.tool.get);
         app.post('/staff/tool', routes.tool.post);
         app.get('/staff/tool/success', routes.tool.success);

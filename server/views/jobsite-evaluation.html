@@ -1,35 +1,38 @@
-<% script(site.url + 'vendor/js/jquery.form.min.js') -%>
-<% script(site.url + 'js/job-eval-controller.js') -%>
+<% script(site.url + '/vendor/js/jquery.form.min.js') -%>
+<% script(site.url + '/js/job-eval-controller.js') -%>
 
 <div class="row">
-  <div class="offset1 span5 hidden-phone">
-    <h3>Job Site Request Data</h4>
+  <div class="span6 well">
+    <h3>Job Data</h3>
     <hr />
-    <ul>
-      <li><strong>Name:</strong> <%= jobRequest.firstName + ' ' + jobRequest.lastName %></li>
-      <li><strong>Address:</strong>
-        <ul>
-          <li><strong>Steet:</strong> <%= jobRequest.address %></li>
-          <li><strong>City:</strong> <%= jobRequest.city %></li>
-          <li><strong>State:</strong> <%= jobRequest.state %></li>
-          <li><strong>Zip:</strong> <%= jobRequest.zip %></li>
-        </ul>
-      </li>
-      <li><strong>Formatted Address:</strong> <%= jobRequest.formattedAddress %></li>
-      <li><strong>Phone Number:</strong> <%= jobRequest.phone %></li>
-      <li><strong>Alternate Phone Number:</strong> <%= jobRequest.altPhone %></li>
-      <li><strong>Description:</strong> <%= jobRequest.description %></li>
-    </ul>
+    <dl>
+      <dt>Name</dt><dd><%= jobsite.firstName + ' ' + jobsite.lastName %></dd>
+      <dt>Email</dt><dd><%= jobsite.email %></dd>
+      <dt>Phone</dt><dd><%= jobsite.phone %></dd>
+      <% if (typeof jobsite.altPhone === 'string') { %>
+        <dt>Alt Phone</dt><dd><%= jobsite.altPhone %></dd>
+      <% } %>
+      <dt>Description</dt><dd><%= jobsite.description %></dd>
+      <br />
+      <dt>Address</dt><dd><%= jobsite.address %><br /><%= jobsite.city + ', ' + jobsite.state + ' ' + jobsite.zip %></dd>
+      <dt>Google Map Address</dt><dd><%= jobsite.formattedAddress %></dd>
+      <br />
+      <dt><strong>Current Status</strong></dt><dd><%=: jobsite.status | capitalize %></dd>
+    </dl>
+    <hr />
+    <button onclick="window.history.back()" class="btn">Go Back</button>
   </div>
-  <div class="span5">
-    <div class="well">
-      <form id="job-eval-form" method="post">
-        <label for="description">Description of Work Requested</label>
-        <textarea class="input-block-level" form="request-form" id="description" name="description" required></textarea>
-        <hr />
-        <a id="delete-button" class="btn">Delete</a>
-        <input class="btn btn-primary pull-right" type="submit" value="Submit" />
-      </form>
-    </div>
+</div>
+<div id="claim-jobsite" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="claim-jobsite-label" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>
+    <h3 id="claim-jobsite-label">Claim Jobsite</h3>
+  </div>
+  <div class="modal-body">
+    <p>Do you want to claim this jobsite for an evaluation? If you claim it, other staff members will not be able to claim it to do an evaluation. Only claim this jobsite if you have an evaluation planned.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <a href="<%= site.url + reqdata.path + '/claim' %>" class="btn btn-success">Confirm</a>
   </div>
 </div>

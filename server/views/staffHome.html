@@ -3,11 +3,11 @@
 <% script(site.url + '/vendor/tablesorter/js/jquery.tablesorter.min.js') -%>
 <% script(site.url + '/vendor/tablesorter/js/jquery.tablesorter.widgets.min.js') -%>
 <% script(site.url + '/vendor/tablesorter/addons/pager/jquery.tablesorter.pager.js') -%>
-<% script(googleMapsApi) -%>
 <% script(site.url + '/js/table-controller.js') -%>
-<% script(site.url + '/js/job-eval-list-controller.js') -%>
-<h3>Jobsite Evaluation Listings</h3>
-<hr />
-<div id="listing-map-container" class="map map-bordered"></div>
-<hr />
-<% include table.html %>
+
+<%- partial('table', { table: tableData.volunteer }) %>
+<%- partial('table', { table: tableData.jobsite }) %>
+<%- partial('table', { table: tableData.tool }) %>
+<%- partial('table', { table: tableData.committee }) %>
+<%- partial('table', { table: tableData.leadership }) %>
+<%- partial('table', { table: tableData.coordinator }) %>
